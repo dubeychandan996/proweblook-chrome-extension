@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>ProWebLook Lead &amp; Domain Verifier</title>
+	<link rel="stylesheet" href="sidepanel.css" />
+</head>
+<body>
+	<div class="app-shell">
+		<!-- Top Brand & Mode Bar -->
+		<header class="topbar">
+			<div class="brand-row">
+				<div class="brand-mark" aria-hidden="true">
+					<svg viewBox="0 0 32 32" width="22" height="22" fill="none">
+						<path d="M16 2.5L4.5 7.3v7.9c0 7.2 4.9 13.7 11.5 15.3 6.6-1.6 11.5-8.1 11.5-15.3V7.3L16 2.5z" fill="url(#pwlGrad)" />
+						<path d="M11.5 16.3l3.1 3.1 6.2-6.4" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+						<defs>
+							<linearGradient id="pwlGrad" x1="4" y1="2" x2="28" y2="30" gradientUnits="userSpaceOnUse">
+								<stop stop-color="#38BDF8" />
+								<stop offset="0.55" stop-color="#4F46E5" />
+								<stop offset="1" stop-color="#10B981" />
+							</linearGradient>
+						</defs>
+					</svg>
+				</div>
+				<div class="brand-copy">
+					<span class="brand-title">ProWebLook</span>
+					<span class="brand-sub">Lead, Phone &amp; Domain Guard</span>
+				</div>
+			</div>
+			<div class="topbar-actions">
+				<button id="modeBadgeBtn" class="mode-pill mode-sandbox" type="button" title="View API mode &amp; credits">
+					<span class="dot"></span>
+					<span id="modeBadgeText">Starter · 15 free</span>
+				</button>
+				<button id="themeToggleBtn" class="icon-btn" type="button" aria-label="Toggle color theme" title="Switch Dark / Light theme">
+					<svg id="themeIcon" viewBox="0 0 20 20" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7">
+						<circle cx="10" cy="10" r="4" />
+						<path d="M10 2v2M10 16v2M2 10h2M16 10h2M4.3 4.3l1.4 1.4M14.3 14.3l1.4 1.4M15.7 4.3l-1.4 1.4M5.7 14.3l-1.4 1.4" stroke-linecap="round" />
+					</svg>
+				</button>
+			</div>
+		</header>
+
+		<!-- Primary Navigation Tabs -->
+		<nav class="tabbar" role="tablist" aria-label="Workspace sections">
+			<button class="tab-btn active" role="tab" aria-selected="true" data-tab="verify" type="button">
+				<span>Verify</span>
+			</button>
+			<button class="tab-btn" role="tab" aria-selected="false" data-tab="pagescan" type="button">
+				<span>Page Scan</span>
+				<span id="scanCountBadge" class="mini-count hidden">0</span>
+			</button>
+			<button class="tab-btn" role="tab" aria-selected="false" data-tab="history" type="button">
+				<span>History</span>
+				<span id="historyCountBadge" class="mini-count hidden">0</span>
+			</button>
+			<button class="tab-btn" role="tab" aria-selected="false" data-tab="settings" type="button">
+				<span>Settings</span>
+			</button>
+		</nav>
+
+		<!-- Main Scrollable Viewport -->
+		<main class="main-scroll">
+			<!-- TAB 1: VERIFY -->
+			<section id="tab-verify" class="tab-panel active" role="tabpanel">
+				<div class="card smart-paste-card">
+					<div class="smart-paste-header">
+						<label for="smartPasteInput" class="section-kicker">SMART PASTE OR QUICK EXTRACT</label>
+						<button id="fillFromTabBtn" class="ghost-xs-btn" type="button" title="Pull domain &amp; top contact from current tab">
+							+ From Tab
+						</button>
+					</div>
+					<input
+						id="smartPasteInput"
+						class="input smart-input"
+						type="text"
+						placeholder="Paste signature, email, +phone, domain, or IP…"
+						autocomplete="off"
+					/>
+				</div>
+
+				<form id="verifyForm" class="card form-card" novalidate>
+					<div class="field-group">
+						<label for="emailInput">Email Address</label>
+						<input id="emailInput" class="input" type="email" placeholder="alex@company.com" autocomplete="off" />
+					</div>
+
+					<div class="field-row">
+						<div class="field-group flex-2">
+							<label for="phoneInput">Phone / WhatsApp</label>
+							<input id="phoneInput" class="input" type="tel" placeholder="+14155552671" autocomplete="off" />
+						</div>
+						<div class="field-group flex-1">
+							<label for="countryInput">Country</label>
+							<select id="countryInput" class="input select-input">
+								<option value="">Auto</option>
+								<option value="US">US (+1)</option>
+								<option value="IN">IN (+91)</option>
+								<option value="GB">GB (+44)</option>
+								<option value="CA">CA (+1)</option>
+								<option value="AU">AU (+61)</option>
+								<option value="AE">AE (+971)</option>
+								<option value="SG">SG (+65)</option>
+								<option value="DE">DE (+49)</option>
+								<option value="FR">FR (+33)</option>
+								<option value="BR">BR (+55)</option>
+								<option value="NL">NL (+31)</option>
+								<option value="ES">ES (+34)</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="field-row">
+						<div class="field-group flex-1">
+							<label for="nameInput">Contact / Company Name <span class="muted-tag">CNAM match</span></label>
+							<input id="nameInput" class="input" type="text" placeholder="Alex Morgan" autocomplete="off" />
+						</div>
+					</div>
+
+					<div class="field-group">
+						<div class="label-with-action">
+							<label for="domainIpInput">Domain or IP Address</label>
+							<button id="useTabDomainBtn" class="text-link-btn" type="button">Use active domain</button>
+						</div>
+						<input id="domainIpInput" class="input" type="text" placeholder="stripe.com or 8.8.8.8" autocomplete="off" />
+					</div>
+
+					<div class="signals-bar" aria-label="Active verification signals">
+						<button type="button" class="sig-chip active" data-sig="enableEmail">Email</button>
+						<button type="button" class="sig-chip active" data-sig="enablePhone">Phone HLR</button>
+						<button type="button" class="sig-chip active" data-sig="enableWhatsapp">WhatsApp</button>
+						<button type="button" class="sig-chip active" data-sig="enableCallerId">Caller ID</button>
+						<button type="button" class="sig-chip active" data-sig="enableDomainBlacklist">DNSBL</button>
+						<button type="button" class="sig-chip active" data-sig="enableIpGeo">IP Geo</button>
+					</div>
+
+					<div class="submit-row">
+						<button id="verifySubmitBtn" class="primary-btn" type="submit">
+							<span id="verifyBtnLabel">Verify Lead &amp; Trust Score</span>
+						</button>
+						<button id="clearFormBtn" class="secondary-btn" type="button" title="Clear fields">Clear</button>
+					</div>
+				</form>
+
+				<div id="verifyErrorBox" class="alert-box alert-error hidden" role="alert"></div>
+
+				<!-- Loading Skeleton -->
+				<div id="verifyLoadingBox" class="card loading-card hidden" aria-live="polite">
+					<div class="spinner"></div>
+					<div>
+						<div class="loading-title">Querying live telecom, SMTP &amp; DNSBL intelligence…</div>
+						<div class="loading-sub">Checking carrier HLR, silent WhatsApp, CNAM &amp; domain reputation</div>
+					</div>
+				</div>
+
+				<!-- Rich Verification Report -->
+				<div id="reportContainer" class="report-stack hidden">
+					<div class="card score-hero-card">
+						<div class="score-ring-wrap">
+							<svg class="score-svg" viewBox="0 0 88 88" width="76" height="76">
+								<circle class="score-track" cx="44" cy="44" r="36" fill="none" stroke-width="7" />
+								<circle
+									id="scoreProgressArc"
+									class="score-arc"
+									cx="44"
+									cy="44"
+									r="36"
+									fill="none"
+									stroke-width="7"
+									stroke-linecap="round"
+									stroke-dasharray="226.2"
+									stroke-dashoffset="226.2"
+								/>
+							</svg>
+							<div class="score-number-overlay">
+								<span id="scoreValueText">0</span>
+								<span class="score-max">/100</span>
+							</div>
+						</div>
+						<div class="score-meta">
+							<div class="score-badges-row">
+								<span id="riskTierBadge" class="verdict-badge verdict-trusted">Trusted</span>
+								<span id="cacheStatusTag" class="source-tag">Live API</span>
+							</div>
+							<p id="reportSummaryText" class="score-summary"></p>
+							<div class="hero-actions-row">
+								<button id="forceRefreshBtn" class="ghost-xs-btn" type="button">Re-Check Live</button>
+								<button id="copyReportBtn" class="ghost-xs-btn" type="button">Copy Report</button>
+								<button id="copyJsonBtn" class="ghost-xs-btn" type="button">JSON</button>
+							</div>
+						</div>
+					</div>
+
+					<div id="signalCardsGrid" class="signal-cards-grid"></div>
+				</div>
+			</section>
+
+			<!-- TAB 2: PAGE SCAN -->
+			<section id="tab-pagescan" class="tab-panel" role="tabpanel">
+				<div class="card scan-hero-card">
+					<div class="scan-hero-top">
+						<div>
+							<div class="section-kicker">ACTIVE WEBPAGE EXTRACTOR</div>
+							<h2 id="scanPageHostTitle" class="scan-host-title">Scan current tab on demand</h2>
+							<p class="scan-desc">
+								Extracts visible emails, <code>mailto:</code>/<code>tel:</code>/WhatsApp links, phone numbers, public IPs, and company domain using temporary <code>activeTab</code> access.
+							</p>
+						</div>
+					</div>
+					<div class="scan-btn-row">
+						<button id="runPageScanBtn" class="primary-btn" type="button">Scan Active Webpage</button>
+						<button id="batchVerifyBtn" class="secondary-btn hidden" type="button">Verify Top 5</button>
+						<button id="exportScanCsvBtn" class="secondary-btn hidden" type="button">CSV</button>
+					</div>
+				</div>
+
+				<div id="scanErrorBox" class="alert-box alert-error hidden" role="alert"></div>
+				<div id="scanResultsContainer" class="scan-results-stack">
+					<div class="empty-state">
+						<div class="empty-title">No webpage scanned yet</div>
+						<p class="empty-sub">Open any company website, LinkedIn profile, CRM record, or directory and click <strong>Scan Active Webpage</strong>.</p>
+					</div>
+				</div>
+			</section>
+
+			<!-- TAB 3: HISTORY VAULT -->
+			<section id="tab-history" class="tab-panel" role="tabpanel">
+				<div class="card history-toolbar-card">
+					<div class="history-top-row">
+						<input id="historySearchInput" class="input" type="search" placeholder="Search email, phone, Caller ID, domain…" />
+					</div>
+					<div class="history-filter-row">
+						<div class="filter-pills">
+							<button type="button" class="filter-pill active" data-filter="all">All</button>
+							<button type="button" class="filter-pill" data-filter="trusted">Trusted</button>
+							<button type="button" class="filter-pill" data-filter="review">Review</button>
+							<button type="button" class="filter-pill" data-filter="high_risk">High Risk</button>
+						</div>
+						<div class="history-actions">
+							<button id="exportHistoryCsvBtn" class="ghost-xs-btn" type="button">Export CSV</button>
+							<button id="clearHistoryBtn" class="ghost-xs-btn danger-text" type="button">Clear</button>
+						</div>
+					</div>
+				</div>
+
+				<div id="historyListContainer" class="history-list"></div>
+			</section>
+
+			<!-- TAB 4: SETTINGS & CREDITS -->
+			<section id="tab-settings" class="tab-panel" role="tabpanel">
+				<div id="sandboxBannerCard" class="card sandbox-card">
+					<div class="section-kicker">ZERO-SIGNUP STARTER SANDBOX</div>
+					<div class="sandbox-meter-header">
+						<strong id="sandboxUsageLabel">15 of 15 free live checks remaining</strong>
+						<span id="sandboxPctLabel" class="muted-tag">Ready</span>
+					</div>
+					<div class="progress-bar">
+						<div id="sandboxProgressFill" class="progress-fill" style="width: 100%"></div>
+					</div>
+					<p class="sandbox-note">
+						Need higher volume? Create a free ProWebLook account for <strong>50 free credits per product</strong> + <strong>20,000 free GeoIP lookups/mo</strong> (no card required).
+					</p>
+					<a class="cta-outline-link" href="https://proweblook.com/auth/signup?utm_source=chrome_extension" target="_blank" rel="noopener noreferrer">
+						Get Free API Key (50 Credits / Tool) →
+					</a>
+				</div>
+
+				<div class="card settings-card">
+					<div class="section-kicker">PROWEBLOOK API KEY (BYOK)</div>
+					<div class="field-group">
+						<label for="apiKeyInput">API Key</label>
+						<input id="apiKeyInput" class="input mono-input" type="password" placeholder="Paste your ProWebLook API key…" autocomplete="off" />
+					</div>
+					<div class="submit-row">
+						<button id="saveApiKeyBtn" class="primary-btn" type="button">Save &amp; Check Balances</button>
+						<button id="disconnectKeyBtn" class="secondary-btn" type="button">Disconnect</button>
+					</div>
+					<div id="settingsStatusMsg" class="status-inline hidden"></div>
+				</div>
+
+				<div id="balancesCard" class="card settings-card hidden">
+					<div class="label-with-action">
+						<span class="section-kicker">LIVE CREDIT POOL BALANCES</span>
+						<button id="refreshBalancesBtn" class="text-link-btn" type="button">Refresh</button>
+					</div>
+					<div id="balancesGrid" class="balances-grid"></div>
+				</div>
+
+				<div class="card settings-card">
+					<div class="section-kicker">PREFERENCES &amp; LOCAL PRIVACY</div>
+					<div class="field-row">
+						<div class="field-group flex-1">
+							<label for="defaultCountrySelect">Default Country Hint</label>
+							<select id="defaultCountrySelect" class="input select-input">
+								<option value="">Auto-detect (E.164)</option>
+								<option value="US">United States (US)</option>
+								<option value="IN">India (IN)</option>
+								<option value="GB">United Kingdom (GB)</option>
+								<option value="CA">Canada (CA)</option>
+								<option value="AU">Australia (AU)</option>
+								<option value="AE">UAE (AE)</option>
+								<option value="SG">Singapore (SG)</option>
+								<option value="DE">Germany (DE)</option>
+							</select>
+						</div>
+						<div class="field-group flex-1">
+							<label for="cacheTtlSelect">Deduplication Cache</label>
+							<select id="cacheTtlSelect" class="input select-input">
+								<option value="24">24 hours (0 repeat credits)</option>
+								<option value="12">12 hours</option>
+								<option value="1">1 hour</option>
+								<option value="0">Disabled (always live)</option>
+							</select>
+						</div>
+					</div>
+					<div class="privacy-footer-row">
+						<button id="purgeCacheBtn" class="ghost-xs-btn" type="button">Purge 24h Cache</button>
+						<div class="footer-links">
+							<a href="https://ext.proweblook.com/privacy" target="_blank" rel="noopener noreferrer">Privacy</a>
+							<span>·</span>
+							<a href="https://docs.proweblook.com/api-reference/" target="_blank" rel="noopener noreferrer">API Docs</a>
+							<span>·</span>
+							<a href="https://proweblook.com/pricing" target="_blank" rel="noopener noreferrer">Pricing</a>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<div id="toastBar" class="toast hidden" role="status" aria-live="polite"></div>
+	</div>
+
+	<script type="module" src="src/sidepanel.js"></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+	"name": "proweblook-chrome-extension",
+	"version": "1.0.0",
+	"description": "ProWebLook: Email, Phone, WhatsApp, Caller ID & Domain Verifier — Official Chrome Extension (Manifest V3 Side Panel) + Cloudflare Edge Companion",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"test": "node --test test/extension.test.mjs",
+		"zip": "node scripts/build-zip.mjs",
+		"deploy:edge": "npx wrangler deploy --config edge-worker/wrangler.toml"
+	},
+	"engines": {
+		"node": ">=18.0.0"
+	},
+	"license": "MIT"
+}

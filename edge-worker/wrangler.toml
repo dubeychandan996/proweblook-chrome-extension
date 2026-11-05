@@ -1,0 +1,17 @@
+name = "proweblook-chrome-edge"
+main = "src/worker.js"
+compatibility_date = "2026-06-25"
+
+[[routes]]
+pattern = "ext.proweblook.com"
+custom_domain = true
+
+[vars]
+APP_PUBLIC_URL = "https://ext.proweblook.com"
+LOOKUP_BASE_URL = "https://lookup.proweblook.com/api/v1"
+IPAPI_BASE_URL = "https://ipapi.proweblook.com"
+SANDBOX_LIMIT = "15"
+
+[[kv_namespaces]]
+binding = "PROWEBLOOK_CHROME_KV"
+id = "a9ad20e7f9fc4102a1398c90d8c481cc"

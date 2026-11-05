@@ -1,0 +1,56 @@
+{
+	"manifest_version": 3,
+	"name": "ProWebLook: Email, Phone & Domain Verifier",
+	"short_name": "ProWebLook",
+	"version": "1.0.0",
+	"description": "Verify emails, phone carriers, silent WhatsApp, Caller ID, DNSBL blacklists & IP risk on any webpage from Chrome's Side Panel.",
+	"homepage_url": "https://ext.proweblook.com",
+	"minimum_chrome_version": "116",
+	"icons": {
+		"16": "icons/icon-16.png",
+		"32": "icons/icon-32.png",
+		"48": "icons/icon-48.png",
+		"128": "icons/icon-128.png"
+	},
+	"action": {
+		"default_title": "Open ProWebLook Lead & Domain Verifier",
+		"default_icon": {
+			"16": "icons/icon-16.png",
+			"32": "icons/icon-32.png",
+			"48": "icons/icon-48.png",
+			"128": "icons/icon-128.png"
+		}
+	},
+	"side_panel": {
+		"default_path": "sidepanel.html"
+	},
+	"background": {
+		"service_worker": "background.js",
+		"type": "module"
+	},
+	"permissions": [
+		"sidePanel",
+		"activeTab",
+		"scripting",
+		"contextMenus",
+		"storage"
+	],
+	"host_permissions": [
+		"https://lookup.proweblook.com/*",
+		"https://proweblook.com/*",
+		"https://ipapi.proweblook.com/*",
+		"https://ext.proweblook.com/*"
+	],
+	"commands": {
+		"_execute_action": {
+			"suggested_key": {
+				"default": "Alt+Shift+P",
+				"mac": "Alt+Shift+P"
+			},
+			"description": "Open ProWebLook Lead & Domain Verifier Side Panel"
+		}
+	},
+	"content_security_policy": {
+		"extension_pages": "script-src 'self'; object-src 'none'; base-uri 'self';"
+	}
+}
